@@ -2,5 +2,9 @@ from django.contrib import admin
 
 from . import models
 
-admin.site.register(models.Dish)
+class dishAdmin(admin.ModelAdmin):
+    model = models.Dish
+    filter_horizontal = ('ingredient',)
+
 admin.site.register(models.Ingredient)
+admin.site.register(models.Dish, dishAdmin)
