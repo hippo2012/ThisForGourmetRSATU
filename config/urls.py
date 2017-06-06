@@ -15,8 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from . import settings
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('restaraunt.urls', app_name='restaraunt', namespace='restaraunt')),
 ]
+
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# urlpatterns += staticfiles_urlpatterns()

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Restaraunt - {% block title %}{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/TopNav.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/Common.css' %}">
+        {% block include %}{% endblock %}
+    </head>
+    <body class="{% block body_classes %}{% endblock %}">
+        {% include 'front/components/TopNav.html' %}
+        <div class="Content">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

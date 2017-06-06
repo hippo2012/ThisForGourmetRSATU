@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Index</title>
-</head>
-<body class="Index">
-    <h1>Список блюд</h1>
+{% extends 'front/Base.html' %}
+
+{% block title %}Menu{% endblock %}
+
+{% block include %}{% endblock %}
+
+{% block body_classes %}Index{% endblock %}
+
+{% block content %}
     <ul class="Dishes">
         {% for dish in dishes %}
             <li>{{ dish.name }}</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
