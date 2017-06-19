@@ -1,5 +1,6 @@
 # -*-coding: utf-8 -*-
 from django.db import models
+from django.utils import timezone
 
 
 class Ingredient(models.Model):
@@ -23,3 +24,21 @@ class Dish(models.Model):
 
     def __str__(self):
         return self.name.encode('utf-8')
+
+class Storage(models.Model):
+    date = models.DateField(default=timezone.now, null=False, blank=False)
+    count = models.IntegerField(default=None, null=False, blank=False)
+    expiration_date = models.DateField(default=None, null=True, blank=False)
+    ingredient = models.ForeignKey(Ingredient)
+
+    class Meta:
+        verbose_name = u'Ячейка'
+        verbose_name_plural = u'Склад'
+
+    def __str__(self):
+        return self.ingredient.name.encode('utf-8')
+
+class Consist(models.Model):
+    dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    count = models.IntegerField(default=1, null=False, blank=False)

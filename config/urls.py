@@ -13,16 +13,23 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
+import os
+from django.conf.urls import include, url, patterns
 from django.contrib import admin
-from django.conf.urls.static import static
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import settings
+
+from tools.various.decorators import required, login_required_flat
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('restaraunt.urls', app_name='restaraunt', namespace='restaraunt')),
 ]
+
+urlpatterns += required(
+    login_required_flat,
+    patterns('',
+        (r'^control/', include('control.urls', app_name='control', namespace='control')), )
+ )
 
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # urlpatterns += staticfiles_urlpatterns()

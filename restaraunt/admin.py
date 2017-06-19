@@ -8,3 +8,4 @@ class dishAdmin(admin.ModelAdmin):
 
 admin.site.register(models.Ingredient)
 admin.site.register(models.Dish, dishAdmin)
+admin.site.register(models.Storage)
