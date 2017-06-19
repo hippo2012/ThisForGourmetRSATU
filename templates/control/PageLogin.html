@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Панель управления</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+</head>
+<body>
+
+    <form id="center" method="post" action=".">{% csrf_token %}
+        <fieldset>
+            <label for="login">Login:</label>
+            <input type="text" id="login" name="login" value=""/>
+
+            <label for="pwd">Password:</label>
+            <input type="password" id="pwd" name="pwd" value=""/>
+
+            {%comment%}<input type="checkbox" class="checkbox" name="remember" id="remember" />
+            <label for="remember" class="checkbox">Запомнить меня</label>{%endcomment%}
+
+            <input type="submit" style="width:auto;float:right;margin-top:15px" value="Log In"/>
+        </fieldset>
+        <!--{{state}}-->
+    </form>
+</body>
+</html>

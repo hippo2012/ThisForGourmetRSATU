@@ -26,5 +26,5 @@ def user_login(request, view_func, *args, **kwargs):
             request.method = 'GET'
             # return view_func(request, *args, **kwargs)
             return HttpResponseRedirect(request.get_full_path())
-    return render_to_response('control/common/components/PageLogin/PageLogin.jinja', {'state': state}, context_instance=RequestContext(request))
+    return render_to_response('control/PageLogin.html', {'state': state}, context_instance=RequestContext(request))
 

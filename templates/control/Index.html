@@ -1,0 +1,15 @@
+{% extends 'control/Base.html' %}
+
+{% block title %}Dishes{% endblock %}
+
+{% block include %}{% endblock %}
+
+{% block body_classes %}Index{% endblock %}
+
+{% block content %}
+    <ul class="Dishes">
+        {% for dish in dishes %}
+            <li>{{ dish.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
