@@ -1,0 +1,19 @@
+.Dishes-item {
+    margin-top: 20px;
+}
+
+li span {
+    margin-right: 5px;
+}
+
+.name {
+    margin-right: 10px;
+}
+
+.Ingredients {
+    margin: 20px 0 10px 0;
+}
+
+.Ingredients-item {
+    margin-top: 10px;
+}

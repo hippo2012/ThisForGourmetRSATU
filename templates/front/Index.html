@@ -1,13 +1,21 @@
 {% extends 'front/Base.html' %}
 
+{% load static %}
+
 {% block title %}Menu{% endblock %}
 
-{% block include %}{% endblock %}
+{% block include %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Index.css' %}">
+{% endblock %}
 
 {% block body_classes %}Index{% endblock %}
 
 {% block content %}
     <ul class="Dishes">
+        <li class="Dishes-item">Борщ (Капуста, Картофель, Морковь, Укроп, Говядина) <button>Заказать</button></li>
+        <li class="Dishes-item">Щи (Капуста, Картофель, Свинина) <button>Заказать</button></li>
+        <li class="Dishes-item">Салат Цезарь с курицей (Салат Айсберг, Курица, Сухари, Заправка для салата) <button>Заказать</button></li>
+
         {% for dish in dishes %}
             <li>{{ dish.name }}</li>
         {% endfor %}

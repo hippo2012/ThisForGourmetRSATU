@@ -1,0 +1,31 @@
+{% extends 'control/Base.html' %}
+
+{% load static %}
+
+{% block title %}Ingredients{% endblock %}
+
+{% block include %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/control/Ingredients.css' %}">
+{% endblock %}
+
+{% block body_classes %}Index{% endblock %}
+
+{% block content %}
+    <h1>Список ингредиентов</h1>
+
+    <ul class="Ingredients">
+
+        <li class="Ingredients-item Ingredients-add">
+            <span>Название</span><input class="name">
+            <button>Добавить</button>
+        </li>
+
+        {% for ingr in ingredients %}
+            <li class="Ingredients-item">
+                <span>Название</span><input class="name" value="{{ ingr.name }}">
+            </li>
+        {% endfor %}
+    </ul>
+
+    <button>Экспорт в excel</button>
+{% endblock %}
