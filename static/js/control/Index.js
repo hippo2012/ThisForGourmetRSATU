@@ -72,6 +72,9 @@ $(document).ready(function () {
         name = $ingrAdd.children('.name').val();
         count = $ingrAdd.children('.count').val();
         addIngr($(this).closest('.Ingredients'), name, count);
+        //clear ingredients selected value and count value
+        $(".Ingredients-item.Ingredients-add")[0].getElementsByClassName("name")[0].value = ""
+        $(".Ingredients-item.Ingredients-add")[0].getElementsByClassName("count")[0].value = ""
     })
 
     $('.Ingredients-delete').click(function () {
