@@ -31,15 +31,11 @@ $(document).ready(function () {
         $count = $('<input>', {class: 'count', value: count}).appendTo($item);
         $obj = $('<button>', {class: 'Ingredients-delete'}).html('Удалить').appendTo($item);
     }
+    
+    function saveDish($el, id) {
+        var ingredients = [], data, url, id;
 
-    var ingredients = $('.Dishes-add .Ingredients-add .name').html();
-
-    $('.Dishes-addButton').click(function () {
-        console.log('Add dish');
-
-        var ingredients = [], data;
-
-        $('.Dishes-add .Ingredients-item').each(function () {
+        $el.closest('.Dishes-item').find('.Ingredients-item').each(function () {
             if (!$(this).hasClass('Ingredients-add')) {
                 var name = $(this).children('.name').val(),
                     count = $(this).children('.count').val();
@@ -51,17 +47,31 @@ $(document).ready(function () {
         });
 
         data = {
-            name: $('.Dishes-add .Dishes-name').val(),
+            name: $el.closest('.Dishes-item').find('.Dishes-name').val(),
             ingredients: ingredients
         };
 
+        url = '/control/api/dish/';
+        id = $el.closest('.Dishes-item').data('id');
+        if (id && id != '') {
+            url += id + '/';
+        }
+
         $.post({
-            url: '/control/api/dish/',
+            url: url,
             data: JSON.stringify(data),
             complete: function () {
                 window.location.reload();
             }
         });
+    }
+
+    var ingredients = $('.Dishes-add .Ingredients-add .name').html();
+
+    $('.Dishes-addButton, .save').click(function () {
+        console.log('Add dish');
+
+        saveDish($(this));
     });
 
     $('.Ingredients-addButton').click(function () {
@@ -82,6 +92,7 @@ $(document).ready(function () {
     });
 
     $('.Dishes-delete').click(function () {
+        if (!confirm('Вы уверены?')) return false;
         $.ajax({
             url: '/control/api/dish/' + $(this).closest('.Dishes-item').children('.name').data('id') + '/',
             method: 'delete',

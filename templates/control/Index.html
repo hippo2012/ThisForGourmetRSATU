@@ -35,7 +35,7 @@
         </li>
 
         {% for dish in dishes %}
-            <li class="Dishes-item">
+            <li class="Dishes-item"  data-id="{{ dish.id }}">
                 <input class="name" value="{{ dish.name }}" data-id="{{ dish.id }}"><button class="Dishes-delete">Удалить</button>
 
                 <h3>Ингредиенты:</h3>
