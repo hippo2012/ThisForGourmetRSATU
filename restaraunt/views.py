@@ -12,7 +12,7 @@ class IndexView(TemplateView):
         context['dishes'] = []
 
         for dish in dishes:
-            ingredients = models.Consist.objects.get(dish=dish.id)
+            ingredients = models.Consist.objects.filter(dish=dish.id)
             has_ingredients = True
 
             for ingredient in ingredients:
@@ -21,7 +21,7 @@ class IndexView(TemplateView):
 
             if has_ingredients:
                 # dish and it`s ingredients
-                obj = {'name': dish.name, 'ingredients': [models.Ingredient.objects.get(id=i.ingredient).name for i in ingredients]}
+                obj = {'name': dish.name, 'ingredients': [models.Ingredient.objects.get(id=i.ingredient_id).name for i in ingredients]}
                 context['dishes'].append(obj)
 
         return context
@@ -35,16 +35,16 @@ class OrderView(TemplateView):
         context['dishes'] = []
 
         for dish in dishes:
-            ingredients = models.Consist.objects.get(dish=dish.id)
+            ingredients = models.Consist.objects.filter(dish=dish.id)
             has_ingredients = False
 
             for ingredient in ingredients:
-                if get_ingredient_count(ingredient.ingredient) >= ingredient.count:
+                if get_ingredient_count(ingredient.ingredient_id) >= ingredient.count:
                     has_ingredients = True
 
             if has_ingredients:
                 # dish and it`s ingredients
-                obj = {'name': dish.name, 'ingredients': [models.Ingredient.objects.get(id=i.ingredient).name for i in ingredients]}
+                obj = {'name': dish.name, 'ingredients': [models.Ingredient.objects.get(id=i.ingredient_id).name for i in ingredients]}
                 context['dishes'].append(obj)
 
         return context
@@ -52,7 +52,7 @@ class OrderView(TemplateView):
 def get_ingredient_count(ingredient_id):
     count = 0
 
-    for item in models.Storage.objects.get(ingredient=ingredient_id):
+    for item in models.Storage.objects.filter(ingredient=ingredient_id):
         count += item.count
 
     return count

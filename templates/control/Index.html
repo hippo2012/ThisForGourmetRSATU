@@ -6,6 +6,8 @@
 
 {% block include %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/control/Index.css' %}">
+
+    <script type="text/javascript" src="{% static 'js/control/Index.js' %}"></script>
 {% endblock %}
 
 {% block body_classes %}Index{% endblock %}
@@ -16,77 +18,37 @@
     <ul class="Dishes">
 
         <li class="Dishes-item Dishes-add">
-            <span>Название</span><input class="name">
+            <span>Название</span><input class="Dishes-name name">
 
             <h3>Ингредиенты:</h3>
             <ul class="Ingredients">
                 <li class="Ingredients-item Ingredients-add">
-                    <span>Название</span><input class="name">
-                    <span>Количество</span><input class="count">
-                    <button>Добавить</button>
-                </li>
-
-                <li class="Ingredients-item">
-                    <span>Название</span><input class="name" value="Капуста">
-                    <span>Количество</span><input class="count" value="1">
+                    <span>Название</span><select class="name">
+                        {% for ingredient in ingredients %}
+                            <option value="{{ ingredient.name }}">{{ ingredient.name }}</option>
+                        {% endfor %}
+                    </select><span>Количество</span><input class="count">
+                    <button class="Ingredients-addButton">Добавить</button>
                 </li>
             </ul>
-            <button>Добавить</button>
+            <button class="Dishes-addButton">Добавить</button>
         </li>
-
-        <li class="Dishes-item">
-            <span>Название</span><input class="name" value="Щи">
-
-            <h3>Ингредиенты:</h3>
-            <ul class="Ingredients">
-                <li class="Ingredients-item Ingredients-add">
-                    <span>Название</span><input class="name">
-                    <span>Количество</span><input class="count">
-                    <button>Добавить</button>
-                </li>
-
-                <li class="Ingredients-item">
-                    <span>Название</span><input class="name" value="Капуста">
-                    <span>Количество</span><input class="count" value="2">
-                </li>
-
-                <li class="Ingredients-item">
-                    <span>Название</span><input class="name" value="Морковь">
-                    <span>Количество</span><input class="count" value="2">
-                </li>
-
-                <li class="Ingredients-item">
-                    <span>Название</span><input class="name" value="Картошка">
-                    <span>Количество</span><input class="count" value="4">
-                </li>
-
-                <li class="Ingredients-item">
-                    <span>Название</span><input class="name" value="Соль">
-                    <span>Количество</span><input value="1">
-                </li>
-
-                <li class="Ingredients-item">
-                    <span>Название</span><input class="name" value="Перец горошек">
-                    <span>Количество</span><input class="count" value="5">
-                </li>
-            </ul>
-
-            <button>Сохранить изменения</button>
-        </li>
-
-
 
         {% for dish in dishes %}
             <li class="Dishes-item">
-               <input class="name" value="{{ dish.name }}">
+                <input class="name" value="{{ dish.name }}">
+
+                <h3>Ингредиенты:</h3>
                 <ul class="Ingredients">
-                    <h3>Ингредиенты:</h3>
+                    <li class="Ingredients-item Ingredients-add">
+                        <span>Название</span><select class="name">
+                        {% for ingredient in ingredients %}
+                            <option value="{{ ingredient.name }}">{{ ingredient.name }}</option>
+                        {% endfor %}
+                    </select><span>Количество</span><input class="count">
+                        <button>Добавить</button>
+                    </li>
                     {% for ingr in dish.ingredients %}
-                        <li class="Ingredients-item Ingredients-add">
-                            <span>Название</span><input class="name">
-                            <span>Количество</span><input class="count">
-                            <button>Добавить</button>
-                        </li>
                         <li class="Ingredients-item">
                             <span>Название</span><input class="name" value="{{ ingr.name }}">
                             <span>Количество</span><input class="count" value="{{ ingr.count }}">
