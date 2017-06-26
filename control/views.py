@@ -17,6 +17,7 @@ class IndexView(TemplateView):
 
             # dish and it`s ingredients
             obj = {'name': dish.name,
+                   'id': dish.id,
                    'ingredients': [{'name': models.Ingredient.objects.get(id=i.ingredient_id).name,
                                     'count': i.count} for i in ingredients]}
             context['dishes'].append(obj)

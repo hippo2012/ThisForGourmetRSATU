@@ -36,7 +36,7 @@
 
         {% for dish in dishes %}
             <li class="Dishes-item">
-                <input class="name" value="{{ dish.name }}">
+                <input class="name" value="{{ dish.name }}" data-id="{{ dish.id }}"><button class="Dishes-delete">Удалить</button>
 
                 <h3>Ингредиенты:</h3>
                 <ul class="Ingredients">
@@ -51,7 +51,7 @@
                     {% for ingr in dish.ingredients %}
                         <li class="Ingredients-item">
                             <span>Название</span><input class="name" value="{{ ingr.name }}">
-                            <span>Количество</span><input class="count" value="{{ ingr.count }}">
+                            <span>Количество</span><input class="count" value="{{ ingr.count }}"><button class="Ingredients-delete">Удалить</button>
                         </li>
                     {% endfor %}
                 </ul>

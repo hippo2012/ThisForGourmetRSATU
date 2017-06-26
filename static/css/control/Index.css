@@ -1,3 +1,7 @@
+button, select, input {
+    display: inline-block;
+}
+
 .Dishes-item {
     margin-top: 20px;
 }
@@ -16,4 +20,8 @@ li span {
 
 .Ingredients-item {
     margin-top: 10px;
+}
+
+.Ingredients-delete {
+    margin-left: 3.5px;
 }

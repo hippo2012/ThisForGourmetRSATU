@@ -21,6 +21,17 @@ $(document).ready(function () {
         }
     });
 
+    function addIngr($el, name, count) {
+        var $name, $count, $obj, $item;
+        $item = $('<div>', {class: 'Ingredients-item'}).appendTo($el);
+        $obj = $('<span>').html('Название').appendTo($item);
+        $name = $('<select>', {class: 'name', value: name}).html(ingredients).appendTo($item);
+        $name.children('option[value="' + name + '"]').attr('selected', 'selected');
+        $obj = $('<span>').html('Количество').appendTo($item);
+        $count = $('<input>', {class: 'count', value: count}).appendTo($item);
+        $obj = $('<button>', {class: 'Ingredients-delete'}).html('Удалить').appendTo($item);
+    }
+
     var ingredients = $('.Dishes-add .Ingredients-add .name').html();
 
     $('.Dishes-addButton').click(function () {
@@ -63,13 +74,17 @@ $(document).ready(function () {
         addIngr($(this).closest('.Ingredients'), name, count);
     })
 
-    function addIngr($el, name, count) {
-        var $name, $count, $obj, $item;
-        $item = $('<div>', {class: 'Ingredients-item'}).appendTo($el);
-        $obj = $('<span>').html('Название').appendTo($item);
-        $name = $('<select>', {class: 'name', value: name}).html(ingredients).appendTo($item);
-        $name.children('option[value="' + name + '"]').attr('selected', 'selected');
-        $obj = $('<span>').html('Количество').appendTo($item);
-        $count = $('<input>', {class: 'count', value: count}).appendTo($item);
-    }
+    $('.Ingredients-delete').click(function () {
+        $(this).closest('.Ingredients-item').remove();
+    });
+
+    $('.Dishes-delete').click(function () {
+        $.ajax({
+            url: '/control/api/dish/' + $(this).closest('.Dishes-item').children('.name').data('id') + '/',
+            method: 'delete',
+            complete: function () {
+                window.location.reload();
+            }
+        });
+    });
 });
