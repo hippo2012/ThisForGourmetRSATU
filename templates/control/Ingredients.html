@@ -5,6 +5,8 @@
 {% block title %}Ingredients{% endblock %}
 
 {% block include %}
+        <script type="text/javascript" src="{% static 'js/control/Ingredient.js' %}"></script>
+
         <link rel="stylesheet" type="text/css" href="{% static 'css/control/Ingredients.css' %}">
 {% endblock %}
 
@@ -17,12 +19,12 @@
 
         <li class="Ingredients-item Ingredients-add">
             <span>Название</span><input class="name">
-            <button>Добавить</button>
+            <button class="Ingredients-addButton">Добавить</button>
         </li>
 
         {% for ingr in ingredients %}
-            <li class="Ingredients-item">
-                <span>Название</span><input class="name" value="{{ ingr.name }}">
+            <li class="Ingredients-item" data-id="{{ ingr.id }}">
+                <span>Название</span><input class="name" value="{{ ingr.name }}"><button class="save">Сохранить</button><button class="delete">Удалить</button>
             </li>
         {% endfor %}
     </ul>

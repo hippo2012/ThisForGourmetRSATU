@@ -32,3 +32,26 @@ class Dish(TemplateView):
         obj.delete()
 
         return HttpResponse({}, content_type="application/json")
+
+class Ingredient(TemplateView):
+    def post(self, request, **kwargs):
+        data = json.loads(request.body.decode("utf-8"))
+
+        id = kwargs.get('id', None)
+        if id:
+            id = int(id)
+            obj = models.Ingredient.objects.get(id=id)
+        else:
+            obj = models.Ingredient()
+
+        obj.name = data['name']
+        obj.save()
+
+        return HttpResponse({}, content_type="application/json")
+
+    def delete(self, request, **kwargs):
+        id = int(kwargs.get('id', None))
+        obj = models.Ingredient.objects.get(id=id)
+        obj.delete()
+
+        return HttpResponse({}, content_type="application/json")

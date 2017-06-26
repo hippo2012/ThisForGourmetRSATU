@@ -13,3 +13,7 @@ li span {
 .name {
     margin-right: 10px;
 }
+
+.delete {
+    margin-left: 5px;
+}
