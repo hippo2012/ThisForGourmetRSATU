@@ -21,7 +21,7 @@ class IndexView(TemplateView):
 
             if has_ingredients:
                 # dish and it`s ingredients
-                obj = {'name': dish.name, 'ingredients': [models.Ingredient.objects.get(id=i.ingredient_id).name for i in ingredients]}
+                obj = {'id': dish.id, 'name': dish.name, 'price': dish.price, 'ingredients': [models.Ingredient.objects.get(id=i.ingredient_id).name for i in ingredients]}
                 context['dishes'].append(obj)
 
         return context
@@ -36,15 +36,15 @@ class OrderView(TemplateView):
 
         for dish in dishes:
             ingredients = models.Consist.objects.filter(dish=dish.id)
-            has_ingredients = False
+            has_ingredients = True
 
             for ingredient in ingredients:
-                if get_ingredient_count(ingredient.ingredient_id) >= ingredient.count:
-                    has_ingredients = True
+                if get_ingredient_count(ingredient.ingredient_id) < ingredient.count:
+                    has_ingredients = False
 
-            if has_ingredients:
+            if not has_ingredients:
                 # dish and it`s ingredients
-                obj = {'name': dish.name, 'ingredients': [models.Ingredient.objects.get(id=i.ingredient_id).name for i in ingredients]}
+                obj = {'id': dish.id, 'name': dish.name, 'price': dish.price, 'ingredients': [models.Ingredient.objects.get(id=i.ingredient_id).name for i in ingredients]}
                 context['dishes'].append(obj)
 
         return context

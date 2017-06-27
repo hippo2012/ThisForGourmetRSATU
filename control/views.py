@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView, View
+from django.utils import timezone
 
 from restaraunt import models
 
@@ -33,5 +34,24 @@ class IngredientsView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(IngredientsView, self).get_context_data(**kwargs)
         context['ingredients'] = models.Ingredient.objects.all()
+
+        return context
+
+class OrdersView(TemplateView):
+    template_name = "control/Orders.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(OrdersView, self).get_context_data(**kwargs)
+
+        id = kwargs.get('id', None)
+        if id:
+            id = int(id)
+
+        if id == 1: #today
+            dishes = models.Order.objects.filter(date=timezone.now())
+        elif id == 2: #tomorrow
+            dishes = models.Order.objects.filter(date=timezone.now() + timezone.timedelta(days=1))
+
+        context['dishes'] = [models.Dish.objects.get(id = d.dish_id) for d in dishes]
 
         return context

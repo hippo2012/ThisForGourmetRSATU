@@ -17,6 +17,7 @@ class Ingredient(models.Model):
 class Dish(models.Model):
     name = models.CharField(max_length=255, default='', null=False, blank=False)
     ingredient = models.ManyToManyField(Ingredient)
+    price = models.IntegerField(default=100, null=False, blank=False)
 
     class Meta:
         verbose_name = u'Блюдо'
@@ -42,3 +43,23 @@ class Consist(models.Model):
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     count = models.IntegerField(default=1, null=False, blank=False)
+
+    class Meta:
+        verbose_name = u'Состоит'
+        verbose_name_plural = u'Состав блюд'
+
+    def __str__(self):
+        return self.dish.name.encode('utf-8')
+
+
+class Order(models.Model):
+    dish = models.ForeignKey(Dish)
+    date = models.DateField(default=timezone.now, null=False, blank=False)
+
+    class Meta:
+        verbose_name = u'Заказ'
+        verbose_name_plural = u'Заказы'
+
+    def __str__(self):
+        return self.dish.name.encode('utf-8')
+

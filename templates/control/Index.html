@@ -24,10 +24,10 @@
             <ul class="Ingredients">
                 <li class="Ingredients-item Ingredients-add">
                     <span>Название</span><select class="name">
-                        {% for ingredient in ingredients %}
-                            <option value="{{ ingredient.name }}">{{ ingredient.name }}</option>
-                        {% endfor %}
-                    </select><span>Количество</span><input class="count">
+                    {% for ingredient in ingredients %}
+                        <option value="{{ ingredient.name }}">{{ ingredient.name }}</option>
+                    {% endfor %}
+                </select><span>Количество</span><input class="count">
                     <button class="Ingredients-addButton">Добавить</button>
                 </li>
             </ul>
@@ -35,8 +35,9 @@
         </li>
 
         {% for dish in dishes %}
-            <li class="Dishes-item"  data-id="{{ dish.id }}">
-                <input class="name" value="{{ dish.name }}" data-id="{{ dish.id }}"><button class="Dishes-delete">Удалить</button>
+            <li class="Dishes-item" data-id="{{ dish.id }}">
+                <input class="name" value="{{ dish.name }}" data-id="{{ dish.id }}">
+                <button class="Dishes-delete">Удалить</button>
 
                 <h3>Ингредиенты:</h3>
                 <ul class="Ingredients">
@@ -46,12 +47,17 @@
                             <option value="{{ ingredient.name }}">{{ ingredient.name }}</option>
                         {% endfor %}
                     </select><span>Количество</span><input class="count">
-                        <button>Добавить</button>
+                        <button class="Ingredients-addButton">Добавить</button>
                     </li>
                     {% for ingr in dish.ingredients %}
                         <li class="Ingredients-item">
-                            <span>Название</span><input class="name" value="{{ ingr.name }}">
-                            <span>Количество</span><input class="count" value="{{ ingr.count }}"><button class="Ingredients-delete">Удалить</button>
+                            <span>Название</span><select class="name">
+                            {% for ingredient in ingredients %}
+                                <option value="{{ ingredient.name }}" {% if ingr.name == ingredient.name %}selected{% endif %}>{{ ingredient.name }}</option>
+                            {% endfor %}
+                        </select>
+                            <span>Количество</span><input class="count" value="{{ ingr.count }}">
+                            <button class="Ingredients-delete">Удалить</button>
                         </li>
                     {% endfor %}
                 </ul>

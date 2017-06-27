@@ -55,14 +55,15 @@ $(document).ready(function () {
     $('.Ingredients-addButton').click(function () {
         console.log('Add ingredient');
 
-        var $ingrAdd, name, count;
+        var $ingrAdd, name, count, $add;
         $ingrAdd = $(this).closest('.Ingredients-add');
         name = $ingrAdd.children('.name').val();
         count = $ingrAdd.children('.count').val();
         addIngr($(this).closest('.Ingredients'), name, count);
         //clear ingredients selected value and count value
-        $(".Ingredients-item.Ingredients-add")[0].getElementsByClassName("name")[0].value = ""
-        $(".Ingredients-item.Ingredients-add")[0].getElementsByClassName("count")[0].value = ""
+        $add = $(this).closest('.Ingredients-add');
+        $add.children('.name').val('');
+        $add.children('.count').val('');
     })
 
     $('.Ingredients-delete').click(function () {

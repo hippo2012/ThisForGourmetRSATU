@@ -5,19 +5,22 @@
 {% block title %}Order dishes{% endblock %}
 
 {% block include %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/Index.css' %}">
+    <script type="text/javascript" src="{% static 'js/front/Order.js' %}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/front/Index.css' %}">
 {% endblock %}
 
 {% block body_classes %}Index{% endblock %}
 
 {% block content %}
     <ul class="Dishes">
-        <li class="Dishes-item">Грибной суп (Грибы, Картофель, Морковь, Сметана, Перец горошек) <button>Заказать</button></li>
-        <li class="Dishes-item">Ролл филадельфия (Рис, Сыр Филадельфия, Огурец, Лосось) <button>Заказать</button></li>
-        <li class="Dishes-item">Салат Цезарь с креветкой (Салат Айсберг, Креветка, Сухари, Заправка для салата) <button>Заказать</button></li>
-
         {% for dish in dishes %}
-            <li>{{ dish.name }}</li>
+            <li class="Dishes-item" data-id="{{ dish.id }}">
+                {{ dish.name }} ({% for ingr in dish.ingredients %}{{ ingr }}{% if not forloop.last %},
+            {% endif %}{% endfor %})
+                <span class="Dishes-price">{{ dish.price }} руб.</span>
+                <button class="Dishes-order">Заказать</button>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}

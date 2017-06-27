@@ -1,0 +1,28 @@
+{% extends 'control/Base.html' %}
+
+{% load static %}
+
+{% block title %}Orders{% endblock %}
+
+{% block include %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/control/Orders.css' %}">
+
+    <script type="text/javascript" src="{% static 'js/control/Index.js' %}"></script>
+{% endblock %}
+
+{% block body_classes %}Orders{% endblock %}
+
+{% block content %}
+    <ul class="SubNav">
+        <li class="SubNav-item"><a href="/control/orders/1">На сегодня</a></li>
+        <li class="SubNav-item"><a href="/control/orders/2">На завтра</a></li>
+    </ul>
+    <h1>Список заказанных блюд</h1>
+
+    <ul class="Orders-list">
+        {% for dish in dishes %}
+            <li class="Orders-item">{{ dish.name }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
