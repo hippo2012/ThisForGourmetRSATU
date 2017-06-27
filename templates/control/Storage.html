@@ -1,0 +1,22 @@
+{% extends 'control/Base.html' %}
+
+{% load static %}
+
+{% block title %}Ingredients{% endblock %}
+
+{% block include %}
+{% endblock %}
+
+{% block body_classes %}Ingredients{% endblock %}
+
+{% block content %}
+    <h1>График наличия ингредиентов на складе</h1>
+
+    {% if graph %}
+        <div style="width:600px;height:500px">
+            {{ graph|safe }}
+        </div>
+    {% endif %}
+
+
+{% endblock %}
