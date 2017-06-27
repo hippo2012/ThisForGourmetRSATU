@@ -81,4 +81,13 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('.export').click(function() {
+        $.post({
+            url: '/control/api/menu_export/',
+            complete: function(file) {
+                debugger;
+            }
+        })
+    });
 });

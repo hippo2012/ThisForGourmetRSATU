@@ -29,5 +29,5 @@
         {% endfor %}
     </ul>
 
-    <button>Экспорт в excel</button>
+    <a href="{% url 'control:api:ingredients_export' %}">Экспорт ингредиентов в excel</a>
 {% endblock %}
