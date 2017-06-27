@@ -18,7 +18,8 @@
     <ul class="Dishes">
 
         <li class="Dishes-item Dishes-add">
-            <span>Название</span><input class="Dishes-name name">
+            <span>Название</span><input class="Dishes-name name"><br>
+            <span>Цена</span><input class="price">
 
             <h3>Ингредиенты:</h3>
             <ul class="Ingredients">
@@ -36,8 +37,9 @@
 
         {% for dish in dishes %}
             <li class="Dishes-item" data-id="{{ dish.id }}">
-                <input class="name" value="{{ dish.name }}" data-id="{{ dish.id }}">
-                <button class="Dishes-delete">Удалить</button>
+                <span>Название</span><input class="name" value="{{ dish.name }}" data-id="{{ dish.id }}">
+                <button class="Dishes-delete">Удалить</button><br>
+                <span>Цена</span><input class="price" value="{{ dish.price }}">
 
                 <h3>Ингредиенты:</h3>
                 <ul class="Ingredients">

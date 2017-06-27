@@ -26,6 +26,7 @@ $(document).ready(function () {
 
         data = {
             name: $el.closest('.Dishes-item').find('.name').val(),
+            price: $el.closest('.Dishes-item').find('.price').val(),
             ingredients: ingredients
         };
 

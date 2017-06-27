@@ -1,6 +1,5 @@
 from django.views.generic import TemplateView, View
 from django.utils import timezone
-
 from restaraunt import models
 
 
@@ -17,8 +16,9 @@ class IndexView(TemplateView):
             ingredients = models.Consist.objects.filter(dish=dish.id)
 
             # dish and it`s ingredients
-            obj = {'name': dish.name,
-                   'id': dish.id,
+            obj = {'id': dish.id,
+                   'name': dish.name,
+                   'price': dish.price,
                    'ingredients': [{'name': models.Ingredient.objects.get(id=i.ingredient_id).name,
                                     'count': i.count} for i in ingredients]}
             context['dishes'].append(obj)
@@ -37,6 +37,7 @@ class IngredientsView(TemplateView):
 
         return context
 
+
 class OrdersView(TemplateView):
     template_name = "control/Orders.html"
 
@@ -47,11 +48,11 @@ class OrdersView(TemplateView):
         if id:
             id = int(id)
 
-        if id == 1: #today
+        if id == 1:  # today
             dishes = models.Order.objects.filter(date=timezone.now())
-        elif id == 2: #tomorrow
+        elif id == 2:  # tomorrow
             dishes = models.Order.objects.filter(date=timezone.now() + timezone.timedelta(days=1))
 
-        context['dishes'] = [models.Dish.objects.get(id = d.dish_id) for d in dishes]
+        context['dishes'] = [models.Dish.objects.get(id=d.dish_id) for d in dishes]
 
         return context

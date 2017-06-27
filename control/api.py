@@ -16,6 +16,7 @@ class Dish(TemplateView):
             obj = models.Dish()
 
         obj.name = data['name']
+        obj.price = int(data['price'])
         obj.save()
         for ingredient in data['ingredients']:
             consist = models.Consist()
